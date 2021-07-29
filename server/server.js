@@ -3,10 +3,17 @@ const models = require("./models");
 const expressGraphQL = require("express-graphql");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const schema = require("./schema/schema");
 const MONGO_URI_STRING = require("./mongoConnection");
 
 const app = express();
+
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
 
 // Replace with your mongoDB
 const MONGO_URI = MONGO_URI_STRING;
@@ -31,5 +38,5 @@ app.use(
 );
 
 app.listen(4000, () => {
-  console.log(`the server is up at http://localhost:4000`)
-})
+  console.log(`the server is up at http://localhost:4000`);
+});
