@@ -11,7 +11,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "http://localhost:3000",  //we can also put * to all any origin to access data
   })
 );
 
