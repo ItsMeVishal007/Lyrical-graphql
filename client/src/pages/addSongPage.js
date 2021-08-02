@@ -1,18 +1,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
 import { gql, useMutation } from "@apollo/client";
 import Button from "../components/Button";
-
-const mutationQuery = gql`
-  mutation AddSongs($title: String) {
-    addSong(title: $title) {
-      id
-      title
-    }
-  }
-`;
+import { mutationAddSong, getAllSongs } from "../lib/gqlQueries/Query";
 
 const AddSongPage = () => {
+  const history = useHistory();
   const {
     register,
     handleSubmit,
@@ -20,7 +14,9 @@ const AddSongPage = () => {
     getValues,
     formState: { errors },
   } = useForm();
-  const [addSong] = useMutation(mutationQuery);
+  const [addSong] = useMutation(mutationAddSong, {
+    refetchQueries: [{ query: getAllSongs }],
+  });
 
   const onSubmit = (data) => {
     getValues("SongName");
@@ -30,6 +26,7 @@ const AddSongPage = () => {
         title: watch("SongName"),
       },
     });
+    history.push("/");
   };
 
   return (
