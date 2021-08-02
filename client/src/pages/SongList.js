@@ -1,6 +1,6 @@
 import React from "react";
 import { gql, useQuery } from "@apollo/client";
-import Song from "./Song";
+import Song from "../components/Song";
 
 const query = gql`
   query GetSongs {
