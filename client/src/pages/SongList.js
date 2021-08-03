@@ -12,6 +12,8 @@ const SongList = () => {
     console.log(data);
   }, [data]);
 
+  if(loading) return <h4>Loading...</h4>;
+
   return (
     <div>
       {data?.songs.map((song) => (
