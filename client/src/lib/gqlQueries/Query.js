@@ -3,6 +3,7 @@ import { gql } from "@apollo/client";
 export const getAllSongs = gql`
   query GetSongs {
     songs {
+      id
       title
     }
   }

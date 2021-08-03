@@ -1,10 +1,11 @@
 import React from "react";
-import { useQuery } from "@apollo/client";
+import { useQuery} from "@apollo/client";
 import Song from "../components/Song";
 import { getAllSongs } from "../lib/gqlQueries/Query";
 
+
 const SongList = () => {
-  const { data, loading, error } = useQuery(getAllSongs, {
+  const { data, loading } = useQuery(getAllSongs, {
     fetchPolicy: "network-only",
   });
 
@@ -12,12 +13,14 @@ const SongList = () => {
     console.log(data);
   }, [data]);
 
-  if(loading) return <h4>Loading...</h4>;
+  if (loading) return <h4>Loading...</h4>;
 
   return (
     <div>
-      {data?.songs.map((song) => (
-        <Song song={song.title} />
+      {data?.songs.map(({title, id}) => (
+        <>
+          <Song song={title} songid={id} />
+        </>
       ))}
     </div>
   );
